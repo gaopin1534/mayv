@@ -46,7 +46,7 @@ class sqlInterface extends mysqli{
     */
     public function select($table,$where,$sort,$if_one=false,$cols = "*"){
         if($where){
-            $wherestr = " where";
+            $wherestr = " where ";
             if(is_array($where)){
                 $index = 0;
                 foreach($where as $key => $val){
@@ -79,7 +79,7 @@ class sqlInterface extends mysqli{
                 $sortstr .= $sort;
             }
         }
-        $sql = "SELECT ".$cols." FROM ".$table.$where.$sort.";";
+        $sql = "SELECT ".$cols." FROM ".$table.$wherestr.$sort.";";
         return $this->_query($sql,$if_one);
     }
     public function update($table,$where,$data){
@@ -154,7 +154,11 @@ class sqlInterface extends mysqli{
         }
         $sql = "INSERT INTO ".$table.$cols." VALUES ".$vals;
         $if_one = true;
-        return $this->_query($sql,$if_one);
+        if($this->_query($sql,$if_one)){
+            return $this->insert_id;
+        }else{
+            return false;
+        }
    }
 
    public function delete($table,$where){
