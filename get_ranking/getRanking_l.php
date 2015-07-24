@@ -11,7 +11,7 @@ class getRanking_l{
         // Get DOM Object
         $dom = phpQuery::newDocument($html);
         $title_table = $dom["table:nth-of-type(2)"];
-        $date = trim(pq(pq($title_table)->find("b")->elements[TITLE_KEY])->text());
+        $date = $this->dateFormat(trim(pq(pq($title_table)->find("b")->elements[TITLE_KEY])->text()));
         $trs = $dom[TARGET_TR];
         $index = 0;
         $tmp_movies = $db->select("m_movie");
@@ -43,5 +43,11 @@ class getRanking_l{
             }
         }
         return true;
+    }
+
+    public function dateFormat($date_string){
+        $elem = explode(" ",$date_string);
+        $date = explode("-",$elem["1"]);
+        return $elem[2]."-".constants::$months[$elem[0]]."-".$date[0];
     }
 }

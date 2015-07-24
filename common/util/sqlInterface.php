@@ -54,7 +54,7 @@ class sqlInterface extends mysqli{
                         $wherestr .= " AND";
                     }
                     if(is_string($val)){
-                        $wherestr .= $key."='".$val."'";
+                        $wherestr .= $key."='".mysql_real_escape_string($val)."'";
                     }else{
                         $wherestr .= $key."=".$val;;
                     }
@@ -92,7 +92,7 @@ class sqlInterface extends mysqli{
                         $wherestr .= " AND";
                     }
                     if(is_string($val)){
-                        $wherestr .= $key."='".$val."'";
+                        $wherestr .= $key."='".mysql_real_escape_string($val)."'";
                     }else{
                         $wherestr .= $key."=".$val;;
                     }
@@ -113,7 +113,7 @@ class sqlInterface extends mysqli{
                         $datastr .= " ,";
                     }
                     if(is_string($val)){
-                        $datastr .= $key."='".$val."'";
+                        $datastr .= $key."='".mysql_real_escape_string($val)."'";
                     }else{
                         $datastr .= $key."=".$val;
                     }
@@ -141,7 +141,7 @@ class sqlInterface extends mysqli{
                 }
                 $cols .= $key;
                 if(is_string($val)){
-                    $vals .= "'".$val."'";
+                    $vals .= "'".mysql_real_escape_string($val)."'";
                 }else{
                     $vals .=$val;
                 }
@@ -171,7 +171,7 @@ class sqlInterface extends mysqli{
                         $wherestr .= " AND";
                     }
                     if(is_string($val)){
-                        $wherestr .= $key."='".$val."'";
+                        $wherestr .= $key."='".mysql_real_escape_string($val)."'";
                     }else{
                         $wherestr .= $key."=".$val;;
                     }
