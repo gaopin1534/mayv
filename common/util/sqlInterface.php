@@ -35,6 +35,11 @@ class sqlInterface extends mysqli{
         }
 
     }
+
+    public function execSql($sql,$if_one=false){
+        return $this->_query($sql,$if_one);
+    }
+
    /**
     * select execute selection from the db
     * @param  string       $table  table name
