@@ -49,6 +49,9 @@
   color:#DFDFDF;
 }
 .button a{
+  display:block;
+  height:100%;
+  width:100%;
   text-decoration: none;
   color:white;
 }
@@ -86,6 +89,7 @@
     <th>映画名</th>
     <th>今週の売上</th>
     <th>累計売上</th>
+    <th>見たい！数</th>
     <th>&nbsp;</th>
   </tr>
   <?php
@@ -98,7 +102,8 @@
     <td><?=$value["original_name"]?></td>
     <td><?=$value["sales"]?></td>
     <td><?=$value["total_sales"]?></td>
-    <td><div class="button"><a href="#" class="wannaSee">見たい！</a></div></td>
+    <td><?=($value["wannasee"])?$value["wannasee"]:0?></td>
+    <td><div class="button"><a href="./vote/vote.php?movie_id=<?=$value["movie_id"]?>" class="wannaSee">見たい！</a></div></td>
   </tr>
   <?php
   if($index == 20){break;}

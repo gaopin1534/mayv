@@ -21,7 +21,7 @@ class sqlInterface extends mysqli{
     */
    private function _query($sql,$if_one){
         $result = parent::query($sql);
-        if(is_bool($result)){
+        if(is_bool($result)||$result == null){
             return $result;
         }
         if($if_one){
@@ -61,7 +61,7 @@ class sqlInterface extends mysqli{
                     if(is_string($val)){
                         $wherestr .= $key."='".mysql_real_escape_string($val)."'";
                     }else{
-                        $wherestr .= $key."=".$val;;
+                        $wherestr .= $key."=".$val;
                     }
                     $index++;
                 }
@@ -117,7 +117,7 @@ class sqlInterface extends mysqli{
                     if($index != 0){
                         $datastr .= " ,";
                     }
-                    if(is_string($val)){
+                    if(is_string($val)!="now()"){
                         $datastr .= $key."='".mysql_real_escape_string($val)."'";
                     }else{
                         $datastr .= $key."=".$val;
@@ -134,7 +134,7 @@ class sqlInterface extends mysqli{
         $if_one = true;
         return $this->_query($sql,$if_one);
    }
-   public function insert($table,$data){
+   public function insert($table,$data,$return = false){
         if($data){
             $cols = " (";
             $vals = " (";
@@ -145,7 +145,7 @@ class sqlInterface extends mysqli{
                     $vals .= " ,";
                 }
                 $cols .= $key;
-                if(is_string($val)){
+                if(is_string($val)&&$val!="now()"){
                     $vals .= "'".mysql_real_escape_string($val)."'";
                 }else{
                     $vals .=$val;
@@ -160,7 +160,11 @@ class sqlInterface extends mysqli{
         $sql = "INSERT INTO ".$table.$cols." VALUES ".$vals;
         $if_one = true;
         if($this->_query($sql,$if_one)){
-            return $this->insert_id;
+            if($return){
+                return $this->insert_id;
+            }else{
+                return true;
+            }
         }else{
             return false;
         }

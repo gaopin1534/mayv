@@ -22,4 +22,7 @@ class constants{
     "November" => 11,
     "December" => 12
     );
+    public static $permissions = array(
+        "scope"=>"user_birthday"
+    );
 }

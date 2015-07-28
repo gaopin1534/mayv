@@ -5,6 +5,7 @@
 <title></title>
 </head>
 <body>
+<?=$login?>
 <?=$message?><br>
 <a href="../index.php">戻る</a>
 </body>
