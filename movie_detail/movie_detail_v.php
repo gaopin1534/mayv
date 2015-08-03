@@ -79,35 +79,39 @@
 </head>
 <body>
 <?=$login?><br>
-<div id="modal-content">
-  <p>ログインしてください</p>
-  <p><a id="modal-close" class="button-link">閉じる</a></p>
-</div>
 <table>
   <tr>
-    <th>順位</th>
+    <th>ID</th>
     <th>映画名</th>
-    <th>今週の売上</th>
-    <th>累計売上</th>
+    <th>概要</th>
+    <th>監督</th>
+    <th>説明</th>
+    <th>米公開日</th>
+    <th>日公開日</th>
+    <th>時間</th>
+    <th>英語タイトル</th>
+    <th>ビデオ</th>
+    <th>総売上</th>
+    <th>役者１</th>
+    <th>役者２</th>
     <th>見たい！数</th>
-    <th>&nbsp;</th>
   </tr>
-  <?php
-  $index = 0;
-  foreach($ranking as $key => $value) {
-    $index++;
-  ?>
   <tr>
-    <td><?=$index?></td>
-    <td><a href="./movie_detail/movie_detail.php?movie_id=<?=$value["movie_id"]?>"><?=$value["original_name"]?></a></td>
-    <td><?=$value["sales"]?></td>
-    <td><?=$value["total_sales"]?></td>
-    <td><?=($value["wannasee"])?$value["wannasee"]:0?></td>
-    <td><div class="button"><a href="./vote/vote.php?movie_id=<?=$value["movie_id"]?>" class="wannaSee">見たい！</a></div></td>
+     <td><?=$form["movie_info"]['movie_id']?></td>
+    <td><?=$form["movie_info"]['movie_name']?></td>
+    <td><?=$form["movie_info"]['outline']?></td>
+    <td><?=$form["movie_info"]['directer']?></td>
+    <td><?=$form["movie_info"]['explanation']?></td>
+    <td><?=$form["movie_info"]['us_published']?></td>
+    <td><?=$form["movie_info"]['jp_published']?></td>
+    <td><?=$form["movie_info"]['duration']?></td>
+    <td><?=$form["movie_info"]['original_name']?></td>
+    <td><?=$form["movie_info"]['video_url']?></td>
+    <td><?=$form["movie_info"]['total_sales']?></td>
+    <td><?=$form["movie_info"]['actor_name1']?></td>
+    <td><?=$form["movie_info"]['actor_name2']?></td>
+    <td><?=$form["movie_info"]['wannasee']?></td>
   </tr>
-  <?php
-  if($index == 20){break;}
-  } ?>
 </table>
 
 </body>

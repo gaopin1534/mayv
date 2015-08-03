@@ -56,12 +56,16 @@ class sqlInterface extends mysqli{
                 $index = 0;
                 foreach($where as $key => $val){
                     if($index != 0){
-                        $wherestr .= " AND";
+                        $wherestr .= " AND ";
                     }
                     if(is_string($val)){
                         $wherestr .= $key."='".mysql_real_escape_string($val)."'";
                     }else{
-                        $wherestr .= $key."=".$val;
+                        if(empty($val)){
+                            $datastr .= $key."= null ";
+                        }else{
+                            $wherestr .= $key."=".$val;
+                        }
                     }
                     $index++;
                 }
@@ -70,21 +74,21 @@ class sqlInterface extends mysqli{
             }
         }
         if($sort){
-            $sortstr = " ORDER BY";
+            $sortstr = " ORDER BY ";
             if(is_array($sort)){
                 $index = 0;
                 foreach($sort as $key => $val){
                     if($index != 0){
-                        $sortstr .= " AND";
+                        $sortstr .= " AND ";
                     }
-                    $sortstr .= $key."=".$val;
+                    $sortstr .= $key." ".$val;
                     $index++;
                 }
             }else{
                 $sortstr .= $sort;
             }
         }
-        $sql = "SELECT ".$cols." FROM ".$table.$wherestr.$sort.";";
+        $sql = "SELECT ".$cols." FROM ".$table.$wherestr.$sortstr.";";
         return $this->_query($sql,$if_one);
     }
     public function update($table,$where,$data){
@@ -99,7 +103,11 @@ class sqlInterface extends mysqli{
                     if(is_string($val)){
                         $wherestr .= $key."='".mysql_real_escape_string($val)."'";
                     }else{
-                        $wherestr .= $key."=".$val;;
+                        if(empty($val)){
+                            $datastr .= $key."= null ";
+                        }else{
+                            $wherestr .= $key."=".$val;;
+                        }
                     }
                     $index++;
                 }
@@ -117,10 +125,14 @@ class sqlInterface extends mysqli{
                     if($index != 0){
                         $datastr .= " ,";
                     }
-                    if(is_string($val)!="now()"){
+                    if(is_string($val)&&$val!="now()"){
                         $datastr .= $key."='".mysql_real_escape_string($val)."'";
                     }else{
-                        $datastr .= $key."=".$val;
+                        if(empty($val)){
+                            $datastr .= $key."= null ";
+                        }else{
+                            $datastr .= $key."=".$val;
+                        }
                     }
                     $index++;
                 }
@@ -148,7 +160,11 @@ class sqlInterface extends mysqli{
                 if(is_string($val)&&$val!="now()"){
                     $vals .= "'".mysql_real_escape_string($val)."'";
                 }else{
-                    $vals .=$val;
+                    if(empty($val)){
+                            $datastr .= $key."= null ";
+                    }else{
+                        $vals .=$val;
+                    }
                 }
                 $index++;
             }

@@ -85,11 +85,20 @@
 </div>
 <table>
   <tr>
-    <th>順位</th>
+    <th>No.</th>
+    <th>ID</th>
     <th>映画名</th>
-    <th>今週の売上</th>
-    <th>累計売上</th>
-    <th>見たい！数</th>
+    <th>概要</th>
+    <th>監督</th>
+    <th>説明</th>
+    <th>米公開日</th>
+    <th>日公開日</th>
+    <th>時間</th>
+    <th>英語タイトル</th>
+    <th>ビデオ</th>
+    <th>総売上</th>
+    <th>役者１</th>
+    <th>役者２</th>
     <th>&nbsp;</th>
   </tr>
   <?php
@@ -99,15 +108,22 @@
   ?>
   <tr>
     <td><?=$index?></td>
-    <td><a href="./movie_detail/movie_detail.php?movie_id=<?=$value["movie_id"]?>"><?=$value["original_name"]?></a></td>
-    <td><?=$value["sales"]?></td>
-    <td><?=$value["total_sales"]?></td>
-    <td><?=($value["wannasee"])?$value["wannasee"]:0?></td>
-    <td><div class="button"><a href="./vote/vote.php?movie_id=<?=$value["movie_id"]?>" class="wannaSee">見たい！</a></div></td>
+    <td><?=$value['movie_id']?></td>
+    <td><?=$value['movie_name']?></td>
+    <td><?=$value['outline']?></td>
+    <td><?=$value['directer']?></td>
+    <td><?=$value['explanation']?></td>
+    <td><?=$value['us_published']?></td>
+    <td><?=$value['jp_published']?></td>
+    <td><?=$value['duration']?></td>
+    <td><?=$value['original_name']?></td>
+    <td><?=$value['video_url']?></td>
+    <td><?=$value['total_sales']?></td>
+    <td><?=$value['actor_name1']?></td>
+    <td><?=$value['actor_name2']?></td>
+    <td><div class="button"><a href="./movie_edit.php?movie_id=<?=$value["movie_id"]?>" class="wannaSee">編集</a></div></td>
   </tr>
-  <?php
-  if($index == 20){break;}
-  } ?>
+  <?php } ?>
 </table>
 
 </body>

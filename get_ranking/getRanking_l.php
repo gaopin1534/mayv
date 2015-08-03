@@ -3,7 +3,7 @@ include_once("../phpquery/phpQuery-onefile.php");
 include_once("../common/setting/constants.php");
 include_once("../common/util/sqlInterface.php");
 include_once("../common/setting/db_setting.php");
-
+include_once("../common/util/dateUtil.php");
 class getRanking_l{
     public function getRanking(){
         $db = new sqlInterface(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -11,7 +11,7 @@ class getRanking_l{
         // Get DOM Object
         $dom = phpQuery::newDocument($html);
         $title_table = $dom["table:nth-of-type(2)"];
-        $date = $this->dateFormat(trim(pq(pq($title_table)->find("b")->elements[TITLE_KEY])->text()));
+        $date = dateUtil::dateFormat(trim(pq(pq($title_table)->find("b")->elements[TITLE_KEY])->text()));
         $trs = $dom[TARGET_TR];
         $index = 0;
         $tmp_movies = $db->select("m_movie");
@@ -45,9 +45,4 @@ class getRanking_l{
         return true;
     }
 
-    public function dateFormat($date_string){
-        $elem = explode(" ",$date_string);
-        $date = explode("-",$elem["1"]);
-        return $elem[2]."-".constants::$months[$elem[0]]."-".$date[0];
-    }
 }

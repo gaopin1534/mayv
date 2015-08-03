@@ -12,8 +12,8 @@ $logic = new register_l();
 $facebook = new Facebook($config);
 $userId = $facebook->getUser();
 if(!$userId){
-    $loginUrl = $facebook->getLoginUrl();
-    $login = '<a href="' . $loginUrl . '">会員登録</a>';
+    $loginUrl = $facebook->getLoginUrl(constants::$permissions);
+    $login = '<a href="' . $loginUrl . '">Facebookで会員登録</a>';
 }else{
     $message = $logic->newRegister($_REQUEST,$facebook);
 }
