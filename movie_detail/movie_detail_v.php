@@ -110,7 +110,7 @@
     <td><?=$form["movie_info"]['total_sales']?></td>
     <td><?=$form["movie_info"]['actor_name1']?></td>
     <td><?=$form["movie_info"]['actor_name2']?></td>
-    <td><?=$form["movie_info"]['wannasee']?></td>
+    <td><?=($form["movie_info"]['wannasee'])?$form["movie_info"]['wannasee']:0?></td>
   </tr>
 </table>
 

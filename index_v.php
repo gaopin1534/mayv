@@ -86,6 +86,7 @@
 <table>
   <tr>
     <th>順位</th>
+    <th>&nbsp;</th>
     <th>映画名</th>
     <th>今週の売上</th>
     <th>累計売上</th>
@@ -99,6 +100,7 @@
   ?>
   <tr>
     <td><?=$index?></td>
+    <td><img src="img/<?=$value["movie_img"]?>"</td>
     <td><a href="./movie_detail/movie_detail.php?movie_id=<?=$value["movie_id"]?>"><?=$value["original_name"]?></a></td>
     <td><?=$value["sales"]?></td>
     <td><?=$value["total_sales"]?></td>
@@ -106,7 +108,7 @@
     <td><div class="button"><a href="./vote/vote.php?movie_id=<?=$value["movie_id"]?>" class="wannaSee">見たい！</a></div></td>
   </tr>
   <?php
-  if($index == 20){break;}
+  if($index == 21){break;}
   } ?>
 </table>
 

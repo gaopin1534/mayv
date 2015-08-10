@@ -21,8 +21,8 @@ if(!$userId){
         header('Location:../index.php');
         exit();
     }else{
-        $fb_user = $facebook->api('/me?fields=id,name,birthday,gender,hometown','GET');
-        $login = '<a href="../mypage/mypage.php">'.$fb_user["name"].'</a>:<a href="./logout/logout.php">ログアウト</a>';
+        // $fb_user = $facebook->api('/me?fields=id,name,birthday,gender,hometown','GET');
+        $login = '<a href="../mypage/mypage.php">マイページ</a>:<a href="./logout/logout.php">ログアウト</a>';
     }
 }
 

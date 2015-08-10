@@ -25,8 +25,8 @@ if(!$userId){
     if(!$user){
         $login = '<a href="./register/register.php">会員登録</a>';
     }else{
-        $fb_user = $facebook->api('/me?fields=id,name,birthday,gender,hometown','GET');
-        $login = '<a href="../mypage/mypage.php">'.$fb_user["name"].'</a>:<a href="./logout/logout.php">ログアウト</a>';
+        // $fb_user = $facebook->api('/me?fields=id,name,birthday,gender,hometown','GET');
+        $login = '<a href="../mypage/mypage.php">マイページ</a>:<a href="./logout/logout.php">ログアウト</a>';
     }
 }
 

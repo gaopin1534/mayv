@@ -18,7 +18,6 @@ class getRanking_l{
         $movies = array();
         foreach($tmp_movies as $val){
             $movies[$val["original_name"]] = $val["movie_id"];
-            $totals[$val["movie_id"]] = $val["total_sales"];
         }
         $tmp_sales = $db->select("dtb_weekly_sales",array("date"=>$date));
         foreach($tmp_sales as $val){
@@ -29,20 +28,37 @@ class getRanking_l{
             if($index != 1 && $index < count($trs)){
                 $tds = pq($value)->find("td");
                 $movie_name = trim(pq($tds->elements[MOVIE_NAME_KEY])->text());
+                $value = str_replace(",","",substr(trim(pq($tds->elements[TOTAL_SALES_KEY])->text()),1));
                 if(empty($movies[$movie_name])){
-                    $id = $db->insert("m_movie",array("original_name"=>$movie_name));
+                    $img = $this->getDetail(TARGET_DOC_ROOT.pq($tds->elements[MOVIE_NAME_KEY])->find("a")->attr("href"));
+                    $id = $db->insert("m_movie",array("original_name"=>$movie_name,"total_sales"=>$value,"movie_img"=>$img));
                 }else{
                     $id = $movies[$movie_name];
+                    $db->update("m_movie",array("movie_id"=>$id),array("total_sales"=>$value));
                 }
                 if(empty($exist_sales[$id])){
                     $sales = str_replace(",","",substr(trim(pq($tds->elements[SALES_KEY])->text()),1));
                     $db->insert("dtb_weekly_sales",array("movie_id"=>$id,"date"=>$date,"sales"=>$sales));
-                    $value = $totals[$id] + $sales;
-                    $db->update("m_movie",array("movie_id"=>$id),array("total_sales"=>$value));
                 }
+            }
+            if($index==21){
+                break;
             }
         }
         return true;
     }
+    private function getDetail($url){
+    $html = file_get_contents($url);
+        // Get DOM Object
+    $dom = phpQuery::newDocument($html);
+    $title_table = $dom["table:nth-of-type(1)"];
+    $img_url = pq(pq($title_table)->find("img")->elements[0])->attr("src");
+    if(substr($img_url,-3)=="jpg"){
+        $data = file_get_contents($img_url, FILE_BINARY);echo $img_url."<br>";
+        file_put_contents('../img/'.basename($img_url),$data);
+    }
+    return basename($img_url);
+
+}
 
 }
