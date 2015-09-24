@@ -10,7 +10,18 @@ class movie_detail_l{
         $form["movie_info"] = $db->execSql($sql,true);
         return $form;
     }
-
+    public function getData($form){
+        $db = new sqlInterface(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+        $form["actor_list"] = $db->select("m_actor");
+        foreach($form["actor_list"] as $val){
+            $form["id_to_name"][$val["actor_id"]] = $val["actor_name"];
+        }
+        $tmp = $db->select("c_movie_actor");
+        foreach($tmp as $val){
+            $form["actor_list"][$val["movie_id"]][] = $val["actor_id"];
+        }
+        return $form;
+    }
     public function movie_detailDateFormat($date){
         return date('Y年m月d日', strtotime($date));
     }

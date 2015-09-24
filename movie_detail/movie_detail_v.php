@@ -108,8 +108,8 @@
     <td><?=$form["movie_info"]['original_name']?></td>
     <td><?=$form["movie_info"]['video_url']?></td>
     <td><?=$form["movie_info"]['total_sales']?></td>
-    <td><?=$form["movie_info"]['actor_name1']?></td>
-    <td><?=$form["movie_info"]['actor_name2']?></td>
+    <td><?=$form["id_to_name"][$form["actor_list"][$form["movie_info"]['movie_id']][0]]?></td>
+    <td><?=$form["id_to_name"][$form["actor_list"][$form["movie_info"]['movie_id']][1]]?></td>
     <td><?=($form["movie_info"]['wannasee'])?$form["movie_info"]['wannasee']:0?></td>
   </tr>
 </table>

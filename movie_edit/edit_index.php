@@ -25,4 +25,5 @@ if(!$userId){
 include_once("edit_index_l.php");
 $logic = new edit_index_l();
 $ranking = $logic->search();
+$form = $logic->getData();
 include_once("edit_index_v.php");

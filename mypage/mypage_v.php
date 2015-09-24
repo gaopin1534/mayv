@@ -86,7 +86,8 @@
 <table>
   <tr>
     <th>No.</th>
-    <th>映画名</th>
+    <th>&nbsp;</th>
+    <th>映画名(英)</th>
     <th>投票日</th>
   </tr>
   <?php
@@ -96,7 +97,9 @@
   ?>
   <tr>
     <td><?=$index?></td>
-    <td><a href="../movie_detail/movie_detail.php?movie_id=<?=$value["movie_id"]?>"><?=$value["original_name"]?></a></td>
+    <td><img src="../img/<?=$value["movie_img"]?>"></td>
+    <td><a href="../movie_detail/movie_detail.php?movie_id=<?=$value["movie_id"]?>"><?=$value["original_name"]?></a><br>
+    <?=$value["movie_name"]?></td>
     <td><?=dateUtil::listDateFormat($value["vote_date"])?></td>
   </tr>
   <?php

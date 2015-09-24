@@ -31,7 +31,7 @@ class getRanking_l{
                 $value = str_replace(",","",substr(trim(pq($tds->elements[TOTAL_SALES_KEY])->text()),1));
                 if(empty($movies[$movie_name])){
                     $img = $this->getDetail(TARGET_DOC_ROOT.pq($tds->elements[MOVIE_NAME_KEY])->find("a")->attr("href"));
-                    $id = $db->insert("m_movie",array("original_name"=>$movie_name,"total_sales"=>$value,"movie_img"=>$img));
+                    $id = $db->insert("m_movie",array("original_name"=>$movie_name,"total_sales"=>$value,"movie_img"=>$img),true);
                 }else{
                     $id = $movies[$movie_name];
                     $db->update("m_movie",array("movie_id"=>$id),array("total_sales"=>$value));

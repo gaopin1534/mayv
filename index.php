@@ -26,4 +26,5 @@ if(!$userId){
 include_once("index_l.php");
 $logic = new index_l();
 $ranking = $logic->search();
+$form = $logic->getData($user);
 include_once("index_v.php");

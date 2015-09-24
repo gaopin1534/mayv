@@ -48,6 +48,12 @@
   background-color:#478EAB;
   color:#DFDFDF;
 }
+.button.gray{
+  background-color:gray;
+}
+.button.gray:hover{
+  background-color:gray;
+}
 .button a{
   display:block;
   height:100%;
@@ -105,7 +111,7 @@
     <td><?=$value["sales"]?></td>
     <td><?=$value["total_sales"]?></td>
     <td><?=($value["wannasee"])?$value["wannasee"]:0?></td>
-    <td><div class="button"><a href="./vote/vote.php?movie_id=<?=$value["movie_id"]?>" class="wannaSee">見たい！</a></div></td>
+    <td><div class="button <?php if($form["voted"][$value["movie_id"]]){?>gray<?php } ?>"><a href=<?php if($form["voted"][$value["movie_id"]]){?>"#" <?php }else{?>"./vote/vote.php?movie_id=<?=$value["movie_id"]?>" <?php }?> class="wannaSee">見たい！</a></div></td>
   </tr>
   <?php
   if($index == 21){break;}

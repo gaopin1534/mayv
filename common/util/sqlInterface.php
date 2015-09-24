@@ -11,6 +11,7 @@ class sqlInterface extends mysqli{
      */
    function __construct($host,$user,$password,$database) {
         parent::__construct($host,$user,$password,$database);
+        parent::autocommit(TRUE);
     }
 
    /**

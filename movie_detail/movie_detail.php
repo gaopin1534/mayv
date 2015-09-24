@@ -33,4 +33,5 @@ if(!$userId){
 include_once("movie_detail_l.php");
 $logic = new movie_detail_l();
 $form = $logic->search($form,$_REQUEST["movie_id"]);
+$form = $logic->getData($form);
 include_once("movie_detail_v.php");

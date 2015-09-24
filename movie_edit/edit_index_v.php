@@ -119,8 +119,8 @@
     <td><?=$value['original_name']?></td>
     <td><?=$value['video_url']?></td>
     <td><?=$value['total_sales']?></td>
-    <td><?=$value['actor_name1']?></td>
-    <td><?=$value['actor_name2']?></td>
+    <td><?=$form["id_to_name"][$form["actor_list"][$value['movie_id']][0]]?></td>
+    <td><?=$form["id_to_name"][$form["actor_list"][$value['movie_id']][1]]?></td>
     <td><div class="button"><a href="./movie_edit.php?movie_id=<?=$value["movie_id"]?>" class="wannaSee">編集</a></div></td>
   </tr>
   <?php } ?>
