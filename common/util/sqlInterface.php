@@ -12,6 +12,7 @@ class sqlInterface extends mysqli{
    function __construct($host,$user,$password,$database) {
         parent::__construct($host,$user,$password,$database);
         parent::autocommit(TRUE);
+        $this->set_charset("utf8");
     }
 
    /**
@@ -60,7 +61,7 @@ class sqlInterface extends mysqli{
                         $wherestr .= " AND ";
                     }
                     if(is_string($val)){
-                        $wherestr .= $key."='".mysql_real_escape_string($val)."'";
+                        $wherestr .= $key."='".$this->real_escape_string($val)."'";
                     }else{
                         if(empty($val)){
                             $datastr .= $key."= null ";
@@ -102,7 +103,7 @@ class sqlInterface extends mysqli{
                         $wherestr .= " AND";
                     }
                     if(is_string($val)){
-                        $wherestr .= $key."='".mysql_real_escape_string($val)."'";
+                        $wherestr .= $key."='".$this->real_escape_string($val)."'";
                     }else{
                         if(empty($val)){
                             $datastr .= $key."= null ";
@@ -127,7 +128,7 @@ class sqlInterface extends mysqli{
                         $datastr .= " ,";
                     }
                     if(is_string($val)&&$val!="now()"){
-                        $datastr .= $key."='".mysql_real_escape_string($val)."'";
+                        $datastr .= $key."='".$this->real_escape_string($val)."'";
                     }else{
                         if(empty($val)){
                             $datastr .= $key."= null ";
@@ -152,19 +153,19 @@ class sqlInterface extends mysqli{
             $cols = " (";
             $vals = " (";
             $index = 0;
-            foreach($data as $key => $val){
+            foreach($data as $key => $vals){
                 if($index != 0){
                     $cols .= " ,";
                     $vals .= " ,";
                 }
                 $cols .= $key;
-                if(is_string($val)&&$val!="now()"){
-                    $vals .= "'".mysql_real_escape_string($val)."'";
+                if(is_string($vals)&&$vals!="now()"){
+                    $vals .= "'".$this->real_escape_string($vals)."'";
                 }else{
-                    if(empty($val)){
+                    if(empty($vals)){
                             $datastr .= $key."= null ";
                     }else{
-                        $vals .=$val;
+                        $vals .=$vals;
                     }
                 }
                 $index++;
@@ -197,7 +198,7 @@ class sqlInterface extends mysqli{
                         $wherestr .= " AND";
                     }
                     if(is_string($val)){
-                        $wherestr .= $key."='".mysql_real_escape_string($val)."'";
+                        $wherestr .= $key."='".$this->real_escape_string($val)."'";
                     }else{
                         $wherestr .= $key."=".$val;;
                     }

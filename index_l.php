@@ -1,7 +1,7 @@
 <?php
-include_once("./common/setting/constants.php");
-include_once("./common/util/sqlInterface.php");
-include_once("./common/setting/db_setting.php");
+include_once("common/setting/constants.php");
+include_once("common/util/sqlInterface.php");
+include_once("common/setting/db_setting.php");
 
 class index_l{
     public function search(){
